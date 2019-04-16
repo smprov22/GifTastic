@@ -1,77 +1,75 @@
 // Array holding TV Shows
 var shows = ["Game of Thrones", "Parks and Recreation", "Handmaid's Tale", "Stranger Things", "Friends", "Broad City", "WestWorld", "Brooklyn 99", "Grey's Anatomy", "This is Us", "The Office", "Breaking Bad", "Schitt's Creek", " The Marvelous Mrs. Maisel", "The Wire", "Superstore"];
 
-      // displayMovieInfo function re-renders the HTML to display the appropriate content
-      function displayShowInfo() {
+// Function for displaying BUTTONS
+function renderButtons() {
 
-        var show = $(this).attr("data-name");
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + show + "&api_key=iHAQpMRezwhXoESrTCCVrnMvoZFSbLkL&limit=10";
+  // Deleting the buttons prior to adding new buttons
+  $("#buttons-view").empty();
+  // Looping through the array ofshows
+  for (var i = 0; i < shows.length; i++) {
 
-        // Creating an AJAX call for the specific movie button being clicked
-        $.ajax({
-          url: queryURL,
-          method: "GET"
-        }).then(function(response) {
-            console.log(response);
-            var results = response.data;
-          // Creating a div to hold the movie
-          for (var i = 0; i < results.length; i++) {
-            var gifDiv = $("<div>");
+    // Then dynamicaly generating buttons for each show in the array
+    var a = $("<button>");
+    // Adding a class of show-btn to our button
+    a.addClass("show-btn");
+    // Adding a data-attribute
+    a.attr("data-name", shows[i]);
+    // Providing the initial button text
+    a.text(shows[i]);
+    // Adding the button to the buttons-view div
+    $("#buttons-view").append(a);
+  }
+}
 
-            var rating = results[i].rating;
+// This function adds user input to the array
+$("#add-show").on("click", function(event) {
+  event.preventDefault();
+  // This line grabs the input from the textbox
+  var show = $("#show-input").val().trim();
 
-            var p = $("<p>").text("Rating: " + rating);
+  // Adding show from the textbox to our array
+  shows.push(show);
 
-            var personImage = $("<img>");
-            personImage.attr("src", results[i].images.fixed_height.url);
+  // Calling renderButtons which handles the processing of our show array
+  renderButtons();
+});
 
-            gifDiv.prepend(p);
-            gifDiv.prepend(personImage);
+// Calling the renderButtons function to display the intial buttons
+renderButtons();
 
-            $("#gifs-view").prepend(gifDiv);
-          } 
-        });
+//Click event to display gifs and ratings
+$("button").on("click", function() {
 
-      }
+var show = $(this).attr("data-name");
+var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + show + "&api_key=iHAQpMRezwhXoESrTCCVrnMvoZFSbLkL&limit=10";
 
-      // Function for displaying gifs
-      function renderButtons() {
+// Creating an AJAX call for the specific show button being clicked
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  })
+    .then(function(response) {
+        console.log("HI");
+        console.log(response.data);
 
-        // Deleting the movies prior to adding new movies
-        // (this is necessary otherwise you will have repeat buttons)
-        $("#buttons-view").empty();
-        // Looping through the array of movies
-        for (var i = 0; i < shows.length; i++) {
+        var results = response.data;
+      // Creating a div to hold the show gifs
+      for (var i = 0; i < results.length; i++) {
+        var gifDiv = $("<div>");
 
-          // Then dynamicaly generating buttons for each movie in the array
-          // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
-          var a = $("<button>");
-          // Adding a class of movie-btn to our button
-          a.addClass("show-btn");
-          // Adding a data-attribute
-          a.attr("data-name", shows[i]);
-          // Providing the initial button text
-          a.text(shows[i]);
-          // Adding the button to the buttons-view div
-          $("#buttons-view").append(a);
-        }
-      }
+        var rating = results[i].rating;
 
-      // This function handles events where a show button is clicked
-      $("#add-show").on("click", function(event) {
-        event.preventDefault();
-        // This line grabs the input from the textbox
-        var show = $("#show-input").val().trim();
+        var p = $("<p>").text("Rating: " + rating);
 
-        // Adding show from the textbox to our array
-        shows.push(show);
+        var showImage = $("<img>");
+        showImage.attr("src", results[i].images.fixed_height.url);
 
-        // Calling renderButtons which handles the processing of our show array
-        renderButtons();
-      });
+        gifDiv.prepend(p);
+        gifDiv.prepend(showImage);
 
-      // Adding a click event listener to all elements with a class of "show-btn"
-      $(document).on("click", ".movie-btn", displayShowInfo);
+        $("#gifs-view").prepend(gifDiv);
+      } 
+    });
 
-      // Calling the renderButtons function to display the intial buttons
-      renderButtons();
+})
