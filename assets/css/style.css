@@ -1,0 +1,86 @@
+body {
+    background: url("../images/tv-screen-with-guide2.png") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    position: relative;
+    height: 100%
+}
+
+h1 {
+    text-align: center;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    color: white;
+}
+
+#buttons-view {
+    position: absolute;
+    top: 475px;
+    left: 30%;
+    width: 45%;
+    margin: 0px auto 20px;
+    
+}
+
+.show-btn {
+    background-color: #008CBA;;
+    color: white;
+    padding: 5px;
+    margin: 5px;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+#input-form {
+    color: white;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    width: 20%;
+    margin: 5px 0px;
+    position: absolute;
+    bottom: -600px;
+    left: 2%;
+    background-color: rgba(0, 0, 0, .7);
+    text-align: center;
+}
+
+#show-input {
+    margin: 7px 5px;
+}
+
+#add-show {
+    margin-bottom: 7px;
+}
+
+#gifs-view {
+    position: absolute;
+    top: 35px;
+    left: 23%;
+    width: 55%;
+    height: 50%;
+}
+
+.gifClass {
+    float: left;
+    margin: 0px 5px;
+    max-width: 100%;
+}
+
+p {
+    margin: 3px 0px;
+    color: white;
+}
+
+/* @media screen and (max-width: 980px) {
+    
+.img {
+    max-width: 50%;
+}
+}
+
+@media screen and (max-width: 768px) {
+
+}
+
+@media screen and (max-width: 640px) {
+
+} */

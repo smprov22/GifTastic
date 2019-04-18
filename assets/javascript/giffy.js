@@ -1,5 +1,5 @@
 // Array holding TV Shows
-var shows = ["Game of Thrones", "Parks and Recreation", "Handmaid's Tale", "Stranger Things", "Friends", "Broad City", "WestWorld", "Brooklyn 99", "Grey's Anatomy", "This is Us", "The Office", "Breaking Bad", "Schitt's Creek", " The Marvelous Mrs. Maisel", "The Wire", "Superstore"];
+var shows = ["Game of Thrones", "Parks and Rec", "Handmaid's Tale", "Stranger Things", "Friends", "Broad City", "WestWorld", "Grey's Anatomy", "This is Us", "The Office"];
 
 // Function for displaying BUTTONS
 function renderButtons() {
@@ -30,19 +30,20 @@ $("#add-show").on("click", function(event) {
 
   // Adding show from the textbox to our array
   shows.push(show);
-
+  
   // Calling renderButtons which handles the processing of our show array
   renderButtons();
+  $("#show-input").val("");
 });
 
 // Calling the renderButtons function to display the intial buttons
 renderButtons();
 
 //Click event to display gifs and ratings
-$("button").on("click", function() {
+$("#buttons-view").on("click", "button", function() {
 
 var show = $(this).attr("data-name");
-var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + show + "&api_key=iHAQpMRezwhXoESrTCCVrnMvoZFSbLkL&limit=10";
+var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + show + "&api_key=iHAQpMRezwhXoESrTCCVrnMvoZFSbLkL&limit=9";
 
 // Creating an AJAX call for the specific show button being clicked
   $.ajax({
@@ -50,20 +51,24 @@ var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + show + "&api_key=iHAQ
     method: "GET"
   })
     .then(function(response) {
-        console.log("HI");
         console.log(response.data);
-
+      $("#gifs-view").empty();
         var results = response.data;
       // Creating a div to hold the show gifs
       for (var i = 0; i < results.length; i++) {
         var gifDiv = $("<div>");
+        gifDiv.addClass("gifClass")
 
         var rating = results[i].rating;
 
         var p = $("<p>").text("Rating: " + rating);
 
         var showImage = $("<img>");
-        showImage.attr("src", results[i].images.fixed_height.url);
+        showImage.attr("src", results[i].images.fixed_height_small_still.url);
+        showImage.attr("data-still", results[i].images.fixed_height_small_still.url);
+        showImage.attr("data-animate", results[i].images.fixed_height_small.url);
+        showImage.attr("data-state", "still");
+        showImage.addClass("gif");
 
         gifDiv.prepend(p);
         gifDiv.prepend(showImage);
@@ -71,5 +76,18 @@ var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + show + "&api_key=iHAQ
         $("#gifs-view").prepend(gifDiv);
       } 
     });
+})
 
+$("#gifs-view").on("click", ".gif", function() {
+  var state = $(this).attr("data-state");
+
+  if (state === "still") {
+    $(this).attr("src", $(this).attr("data-animate"));
+    $(this).attr("data-state", "animate");
+  }
+
+  else {
+    $(this).attr("src", $(this).attr("data-still"));
+    $(this).attr("data-state", "still");
+  }
 })
