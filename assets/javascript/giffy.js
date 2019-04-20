@@ -80,6 +80,7 @@ var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + show + "&api_key=iHAQ
 
 $("#gifs-view").on("click", ".gif", function() {
   var state = $(this).attr("data-state");
+  console.log(state);
 
   if (state === "still") {
     $(this).attr("src", $(this).attr("data-animate"));

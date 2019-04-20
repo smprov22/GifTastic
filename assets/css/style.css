@@ -5,7 +5,11 @@ body {
     -o-background-size: cover;
     background-size: cover;
     position: relative;
-    height: 100%
+    height: 650px;
+}
+
+.container {
+    height: 100%;
 }
 
 h1 {
@@ -16,9 +20,9 @@ h1 {
 
 #buttons-view {
     position: absolute;
-    top: 475px;
+    top: 500px;
     left: 30%;
-    width: 45%;
+    width: 43%;
     margin: 0px auto 20px;
     
 }
@@ -26,9 +30,16 @@ h1 {
 .show-btn {
     background-color: #008CBA;;
     color: white;
-    padding: 5px;
+    padding: 6px 10px;
     margin: 5px;
     font-family: "Trebuchet MS", Helvetica, sans-serif;
+    border-radius: 5px;
+    border: none;
+}
+
+.show-btn:hover {
+    cursor: pointer;
+    background-color: #123875;
 }
 
 #input-form {
@@ -37,7 +48,7 @@ h1 {
     width: 20%;
     margin: 5px 0px;
     position: absolute;
-    bottom: -600px;
+    bottom: 20px;
     left: 2%;
     background-color: rgba(0, 0, 0, .7);
     text-align: center;
@@ -53,16 +64,17 @@ h1 {
 
 #gifs-view {
     position: absolute;
-    top: 35px;
+    top: 25px;
     left: 23%;
-    width: 55%;
-    height: 50%;
+    width: 54%;
+    height: 59%;
+    overflow: hidden;
 }
 
 .gifClass {
     float: left;
     margin: 0px 5px;
-    max-width: 100%;
+    max-width: 80%;
 }
 
 p {
@@ -70,17 +82,22 @@ p {
     color: white;
 }
 
-/* @media screen and (max-width: 980px) {
-    
-.img {
-    max-width: 50%;
+@media screen and (min-width: 1400px) {
+    .gifClass {
+        max-width: 80%;
+    }
+    #buttons-view {
+        bottom: -600;
+    }
+
 }
+
+@media screen and (min-width: 1200) {
+    .gifClass {
+        max-width: 50%;
+    }
+
+    #gifs-view {
+        top: 35px;
+    }
 }
-
-@media screen and (max-width: 768px) {
-
-}
-
-@media screen and (max-width: 640px) {
-
-} */
