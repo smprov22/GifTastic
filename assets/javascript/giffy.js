@@ -6,7 +6,7 @@ function renderButtons() {
 
   // Deleting the buttons prior to adding new buttons
   $("#buttons-view").empty();
-  // Looping through the array ofshows
+  // Looping through the array of shows
   for (var i = 0; i < shows.length; i++) {
 
     // Then dynamicaly generating buttons for each show in the array
@@ -28,9 +28,13 @@ $("#add-show").on("click", function(event) {
   // This line grabs the input from the textbox
   var show = $("#show-input").val().trim();
 
+  if (show === "") {
+    alert("Must enter text in the box");
+    return false;
+  }
   // Adding show from the textbox to our array
   shows.push(show);
-  
+
   // Calling renderButtons which handles the processing of our show array
   renderButtons();
   $("#show-input").val("");

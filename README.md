@@ -1,1 +1,5 @@
 # GifTastic
+
+This is an app that populates gifs each time a button is clicked.   I chose the theme of TV shows so I decided to make my CSS follow suit.  If you click any of the buttons on the page, 9 gifs will show up on the TV screen above.  You can also add your own buttons for your favorite shows in the input field on the left hand side.  This new button will also populate gifs when pressed.
+
+This homework assignment was finally something I looked at and thought I could figure it out no problem, and for once, that was mostly the case.  I had a few hiccups but nothing major.  My major hurdle in this exercise was the CSS, which is usually the thing I am the best at.  My main problem was making the gifs and buttons stay where I wanted them on the page.  It still isn't perfect, but my solution is the best I could manage.  For some reason media queries weren't working for me.
