@@ -77,8 +77,7 @@ var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + show + "&api_key=iHAQ
         gifDiv.prepend(p);
         gifDiv.prepend(showImage);
 
-        $("#gifs-view").prepend(gifDiv);
-      } 
+        $("#gifs-view").prepend(gifDiv);      } 
     });
 })
 
